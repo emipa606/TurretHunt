@@ -1,5 +1,8 @@
 # Changelog for TurretHunt
 
+1.5.1 - Added CE-support
+
+
 1.5.0 - First publish
 Used DeepL to update translations for ChineseSimplified, French, German, Polish
 

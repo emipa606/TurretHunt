@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using BaalEvan.TurretHunt.Commands;
 using HarmonyLib;
 using RimWorld;
@@ -6,9 +7,22 @@ using Verse;
 
 namespace BaalEvan.TurretHunt.Patches;
 
-[HarmonyPatch(typeof(Building_TurretGun), nameof(Building_TurretGun.GetGizmos))]
+[HarmonyPatch]
 internal static class Building_TurretGun_GetGizmos
 {
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        yield return AccessTools.Method(typeof(Building_TurretGun), nameof(Building_TurretGun.GetGizmos));
+
+        if (!ModsConfig.IsActive("CETeam.CombatExtended"))
+        {
+            yield break;
+        }
+
+        Log.Message("[TurretHunt]: Adding support for CE turrets");
+        yield return AccessTools.Method("CombatExtended.Building_TurretGunCE:GetGizmos");
+    }
+
     public static void Postfix(Building_TurretGun __instance, ref IEnumerable<Gizmo> __result)
     {
         var huntGizmo = Command_TurretHunt.TryGetGizmo(__instance);

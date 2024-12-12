@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>d0f22343-05a8-4b0d-870d-dff64c0bc6f9</ID>
   <ModName>Turret Hunt (Continued)</ModName>
-  <Version>1.5.0</Version>
+  <Version>1.5.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,7 +12,4 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
-
-
-
 
