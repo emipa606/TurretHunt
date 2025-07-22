@@ -6,11 +6,11 @@ namespace BaalEvan.TurretHunt.Commands;
 
 internal class Command_TurretHunt_Designated : Command_Toggle
 {
-    private static readonly Vector2 overlayIconOffset = new Vector2(59f, 57f);
+    private static readonly Vector2 overlayIconOffset = new(59f, 57f);
 
     private readonly Building_TurretGun turret;
 
-    public Command_TurretHunt_Designated(Building_TurretGun turret)
+    private Command_TurretHunt_Designated(Building_TurretGun turret)
     {
         this.turret = turret;
         icon = TurretHuntDefOf.Textures.turretHuntDesignated;

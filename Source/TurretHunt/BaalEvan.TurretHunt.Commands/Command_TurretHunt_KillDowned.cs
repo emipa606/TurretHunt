@@ -6,11 +6,11 @@ namespace BaalEvan.TurretHunt.Commands;
 
 internal class Command_TurretHunt_KillDowned : Command_Toggle
 {
-    private static readonly Vector2 overlayIconOffset = new Vector2(59f, 57f);
+    private static readonly Vector2 overlayIconOffset = new(59f, 57f);
 
     private readonly Building_TurretGun turret;
 
-    public Command_TurretHunt_KillDowned(Building_TurretGun turret)
+    private Command_TurretHunt_KillDowned(Building_TurretGun turret)
     {
         this.turret = turret;
         icon = TurretHuntDefOf.Textures.turretHuntKill;

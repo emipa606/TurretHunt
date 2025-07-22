@@ -19,7 +19,6 @@ public class WorldSettings(World world) : WorldComponent(world)
 
             return result;
         }
-        set => turretHunt = value;
     }
 
     public override void ExposeData()

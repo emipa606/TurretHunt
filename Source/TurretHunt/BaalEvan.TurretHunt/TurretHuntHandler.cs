@@ -22,7 +22,7 @@ public class TurretHuntHandler
             var minRange = searcher.AttackVerb.verbProps.EffectiveMinRange(pawn, searcher) *
                            searcher.AttackVerb.verbProps.EffectiveMinRange(pawn, searcher);
             var maxRange = searcher.AttackVerb.verbProps.range * searcher.AttackVerb.verbProps.range;
-            if (PawnValidator(pawn, minRange, maxRange))
+            if (pawnValidator(pawn, minRange, maxRange))
             {
                 huntingTargetCandidates.Add(new HuntingTargetCandidate(pawn,
                     (searcher.Position - pawn.Position).LengthHorizontalSquared));
@@ -32,7 +32,7 @@ public class TurretHuntHandler
         huntingTargetCandidates.Sort();
         return huntingTargetCandidates.Count > 0 ? huntingTargetCandidates[0].target : null;
 
-        bool PawnValidator(Pawn p, float min, float max)
+        bool pawnValidator(Pawn p, float min, float max)
         {
             if (p == null)
             {

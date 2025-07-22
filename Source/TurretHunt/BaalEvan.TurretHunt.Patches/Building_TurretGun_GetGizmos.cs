@@ -30,21 +30,21 @@ internal static class Building_TurretGun_GetGizmos
         var killDownedGizmo = Command_TurretHunt_KillDowned.TryGetGizmo(__instance);
         if (huntGizmo != null)
         {
-            __result = AppendGizmo(__result, huntGizmo);
+            __result = appendGizmo(__result, huntGizmo);
         }
 
         if (designatedGizmo != null)
         {
-            __result = AppendGizmo(__result, designatedGizmo);
+            __result = appendGizmo(__result, designatedGizmo);
         }
 
         if (killDownedGizmo != null)
         {
-            __result = AppendGizmo(__result, killDownedGizmo);
+            __result = appendGizmo(__result, killDownedGizmo);
         }
     }
 
-    private static IEnumerable<Gizmo> AppendGizmo(IEnumerable<Gizmo> originalSequence, Gizmo addition)
+    private static IEnumerable<Gizmo> appendGizmo(IEnumerable<Gizmo> originalSequence, Gizmo addition)
     {
         foreach (var item in originalSequence)
         {
