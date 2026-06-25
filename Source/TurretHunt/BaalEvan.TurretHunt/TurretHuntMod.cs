@@ -44,6 +44,5 @@ namespace BaalEvan.TurretHunt
                 Log.Error("[TurretHunt] " + message);
             }
         }
-        public override string SettingsCategory() => "Turret Hunt";
     }
 }
