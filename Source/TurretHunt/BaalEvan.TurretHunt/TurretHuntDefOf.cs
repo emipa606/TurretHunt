@@ -1,5 +1,5 @@
-using HugsLib.Utils;
 using RimWorld;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -12,14 +12,12 @@ public static class TurretHuntDefOf
     public static class Textures
     {
         public static Texture2D turretHunt;
-
         public static Texture2D turretHuntKill;
-
         public static Texture2D turretHuntDesignated;
 
         static Textures()
         {
-            var fields = typeof(Textures).GetFields(HugsLibUtility.AllBindingFlags);
+            var fields = typeof(Textures).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
             foreach (var fieldInfo in fields)
             {
                 fieldInfo.SetValue(null, ContentFinder<Texture2D>.Get(fieldInfo.Name));

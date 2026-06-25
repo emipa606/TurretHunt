@@ -6,22 +6,21 @@ namespace BaalEvan.TurretHunt;
 
 public class TurretHuntSettings : IExposable
 {
-    private HashSet<int> turretsDesignated = [];
-    private HashSet<int> turretsHunting = [];
-
-    private HashSet<int> turretsKilling = [];
+    private HashSet<int> turretsDesignated = new HashSet<int>();
+    private HashSet<int> turretsHunting = new HashSet<int>();
+    private HashSet<int> turretsKilling = new HashSet<int>();
 
     public void ExposeData()
     {
-        var list = new List<int>(turretsHunting);
-        var list2 = new List<int>(turretsDesignated);
-        var list3 = new List<int>(turretsKilling);
-        Scribe_Collections.Look(ref list, "turrets");
-        Scribe_Collections.Look(ref list2, "turretsKillDowned");
-        Scribe_Collections.Look(ref list3, "turretsDesignated");
-        turretsHunting = [..list];
-        turretsDesignated = [..list2];
-        turretsKilling = [..list3];
+        var listHunting = new List<int>(turretsHunting);
+        var listDesignate = new List<int>(turretsDesignated);
+        var listKilling = new List<int>(turretsKilling);
+        Scribe_Collections.Look(ref listHunting, "turrets");
+        Scribe_Collections.Look(ref listDesignate, "turretsDesignated");
+        Scribe_Collections.Look(ref listKilling, "turretsKillDowned");
+        turretsHunting = new HashSet<int>(listHunting);
+        turretsDesignated = new HashSet<int>(listDesignate);
+        turretsKilling = new HashSet<int>(listKilling);
     }
 
     public bool TurretIsHunting(Building_TurretGun pawn)
