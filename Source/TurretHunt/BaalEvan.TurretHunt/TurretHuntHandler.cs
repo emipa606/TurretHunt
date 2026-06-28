@@ -1,7 +1,6 @@
+using RimWorld;
 using System;
 using System.Collections.Generic;
-using HugsLib.Utils;
-using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -9,7 +8,7 @@ namespace BaalEvan.TurretHunt;
 
 public class TurretHuntHandler
 {
-    private static readonly List<HuntingTargetCandidate> huntingTargetCandidates = [];
+    private static readonly List<HuntingTargetCandidate> huntingTargetCandidates = new List<HuntingTargetCandidate>();
 
     private static TurretHuntSettings WorldSettings => TurretHuntController.Instance.WorldSettings.TurretHunt;
 
@@ -35,19 +34,17 @@ public class TurretHuntHandler
         bool pawnValidator(Pawn p, float min, float max)
         {
             if (p == null)
-            {
                 return false;
-            }
 
             var lengthHorizontalSquared = (searcher.Position - p.Position).LengthHorizontalSquared;
-            var inRange = lengthHorizontalSquared >= (double)min && lengthHorizontalSquared <= (double)max;
+            var inRange = lengthHorizontalSquared >= min && lengthHorizontalSquared <= max;
             var fogged = p.Position.Fogged(searcher.Map);
             var canSee = searcher.CanSee(p);
             var hasRace = p.RaceProps != null;
             var animal = p.RaceProps?.Animal ?? false;
             var hasFaction = p.Faction == null;
             var isDesignated = WorldSettings.TurretIsHuntingForDesignated(searcher);
-            var hasDesignation = p.HasDesignation(DesignationDefOf.Hunt);
+            var hasDesignation = p.Map?.designationManager?.DesignationOn(p, DesignationDefOf.Hunt) != null;
             var isHunting = WorldSettings.TurretIsHuntingForKill(searcher);
             var downed = p.Downed;
             return inRange && !fogged && canSee && hasRace && animal && hasFaction &&
@@ -60,7 +57,6 @@ public class TurretHuntHandler
         : IComparable<HuntingTargetCandidate>
     {
         public readonly Pawn target = target;
-
         private readonly int distanceSquared = distanceSquared;
 
         public int CompareTo(HuntingTargetCandidate other)
