@@ -1,5 +1,5 @@
-using RimWorld;
 using System.Reflection;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -17,7 +17,8 @@ public static class TurretHuntDefOf
 
         static Textures()
         {
-            var fields = typeof(Textures).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            var fields = typeof(Textures).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static |
+                                                    BindingFlags.Instance);
             foreach (var fieldInfo in fields)
             {
                 fieldInfo.SetValue(null, ContentFinder<Texture2D>.Get(fieldInfo.Name));

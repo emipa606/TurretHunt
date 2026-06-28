@@ -6,9 +6,9 @@ namespace BaalEvan.TurretHunt;
 
 public class TurretHuntSettings : IExposable
 {
-    private HashSet<int> turretsDesignated = new HashSet<int>();
-    private HashSet<int> turretsHunting = new HashSet<int>();
-    private HashSet<int> turretsKilling = new HashSet<int>();
+    private HashSet<int> turretsDesignated = [];
+    private HashSet<int> turretsHunting = [];
+    private HashSet<int> turretsKilling = [];
 
     public void ExposeData()
     {

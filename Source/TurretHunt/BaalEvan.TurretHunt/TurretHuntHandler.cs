@@ -1,6 +1,6 @@
-using RimWorld;
 using System;
 using System.Collections.Generic;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -8,7 +8,7 @@ namespace BaalEvan.TurretHunt;
 
 public class TurretHuntHandler
 {
-    private static readonly List<HuntingTargetCandidate> huntingTargetCandidates = new List<HuntingTargetCandidate>();
+    private static readonly List<HuntingTargetCandidate> huntingTargetCandidates = [];
 
     private static TurretHuntSettings WorldSettings => TurretHuntController.Instance.WorldSettings.TurretHunt;
 
@@ -34,7 +34,9 @@ public class TurretHuntHandler
         bool pawnValidator(Pawn p, float min, float max)
         {
             if (p == null)
+            {
                 return false;
+            }
 
             var lengthHorizontalSquared = (searcher.Position - p.Position).LengthHorizontalSquared;
             var inRange = lengthHorizontalSquared >= min && lengthHorizontalSquared <= max;

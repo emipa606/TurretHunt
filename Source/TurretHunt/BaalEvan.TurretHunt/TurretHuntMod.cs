@@ -1,48 +1,46 @@
 using HarmonyLib;
 using Verse;
 
-namespace BaalEvan.TurretHunt
+namespace BaalEvan.TurretHunt;
+
+public class TurretHuntController : Mod
 {
-    public class TurretHuntController : Mod
+    public TurretHuntController(ModContentPack content) : base(content)
     {
-        private static TurretHuntController instance;
-        public static TurretHuntController Instance => instance;
+        Instance = this;
+        new Harmony("BaalEvan.TurretHunt").PatchAll();
+    }
 
-        private WorldSettings worldSettings;
-        public WorldSettings WorldSettings
+    public static TurretHuntController Instance { get; private set; }
+
+    public WorldSettings WorldSettings
+    {
+        get
         {
-            get
+            if (field == null && Find.World != null || field?.world != Find.World && Find.World != null)
             {
-                if (worldSettings == null && Find.World != null)
-                {
-                    worldSettings = Find.World.GetComponent<WorldSettings>();
-                }
-                return worldSettings;
+                field = Find.World.GetComponent<WorldSettings>();
             }
+
+            return field;
+        }
+    }
+
+    public static class Logger
+    {
+        public static void Message(string message)
+        {
+            Log.Message($"[TurretHunt] {message}");
         }
 
-        public TurretHuntController(ModContentPack content) : base(content)
+        public static void Warning(string message)
         {
-            instance = this;
-            new Harmony("BaalEvan.TurretHunt").PatchAll();
+            Log.Warning($"[TurretHunt] {message}");
         }
 
-        public static class Logger
+        public static void Error(string message)
         {
-            public static void Message(string message)
-            {
-                Log.Message("[TurretHunt] " + message);
-            }
-
-            public static void Warning(string message)
-            {
-                Log.Warning("[TurretHunt] " + message);
-            }
-
-            public static void Error(string message)
-            {
-                Log.Error("[TurretHunt] " + message);
-            }
+            Log.Error($"[TurretHunt] {message}");
         }
     }
 }
